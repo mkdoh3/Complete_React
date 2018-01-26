@@ -1,55 +1,77 @@
-const app = {
-  title: 'Indecision App',
-  subtitle: "Trust me, I'm a computer!",
-  options: []
-}
 
-const onFormSubmit = (event) => {
-  event.preventDefault();
-  const option = event.target.elements.optionInput.value;
-  if(option) {
-    app.options.push(option)
-    event.target.elements.optionInput.value = "";
+class IndecisionApp extends React.Component {
+  render() {
+    const title = 'Indecision App';
+    const subtitle = "Trust me, I'm a computer!";
+    const options = ['test1', 'test2', 'test3', 'test4']
+    return (
+      <div>
+        <Header title={title} subtitle={subtitle}/>
+        <BigButton />
+        <Options options={options} />
+        <AddOption />
+      </div>
+    )
   }
-  renderApp();
 }
 
-const resetOptions = () => {
-  app.options = [];
-  renderApp();
+
+//react enforces uppercase in class name, not optional!
+class Header extends React.Component {
+  //render must always be defined in a react component!
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <h2>{this.props.subtitle}</h2>
+      </div>
+
+    )
+  }
 }
 
-const numbers = [1,2,3];
+class BigButton extends React.Component {
+  render() {
+    return (
+      <div>
+        <button>What should I do?</button>
+      </div>
+    );
+  }
+}
 
-
-
-
-
-const appRoot = document.getElementById('app');
-
-const renderApp = () => {
-  const template = (
-    <div>
-      <h1>{app.title}</h1>
-      {app.subtitle && <h4>{app.subtitle}</h4>}
-      <p> {app.options.length > 0 ? 'Here are your options: ' : 'No Options :('}</p>
-      <p>{app.options.length}</p>
-      <button onClick={resetOptions}>Reset Options</button>
-      <ol>
+class Options extends React.Component {
+  render() {
+    return (
+      <div>
         {
-          app.options.map(option => <li key={option}>{option}</li>)
+          this.props.options.map(option => <Option key={option} optionText={option} />)
         }
-      </ol>
-      <form onSubmit={onFormSubmit}>
-        <input type="text" name="optionInput" />
-        <button>Add Option</button>
-      </form>
-    </div>
-  );
-  ReactDOM.render(template, appRoot)
+      </div>
+    )
+  }
 }
 
-renderApp();
+class Option extends React.Component {
+  render() {
+    return (
+      <div>
+         {this.props.optionText}
+      </div>
+    )
+  }
+}
+
+class AddOption extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>Add an option: </p>
+      </div>
+    )
+  }
+}
 
 
 
+ReactDOM.render(<IndecisionApp />, document.getElementById('app'))
