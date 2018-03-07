@@ -69,7 +69,8 @@ var IndecisionApp = function (_React$Component) {
         }),
         React.createElement(AddOption, {
           handleAddOption: this.handleAddOption
-        })
+        }),
+        React.createElement(Counter, null)
       );
     }
   }]);
@@ -242,6 +243,76 @@ var AddOption = function (_React$Component6) {
   }]);
 
   return AddOption;
+}(React.Component);
+
+var Counter = function (_React$Component7) {
+  _inherits(Counter, _React$Component7);
+
+  function Counter(props) {
+    _classCallCheck(this, Counter);
+
+    var _this7 = _possibleConstructorReturn(this, (Counter.__proto__ || Object.getPrototypeOf(Counter)).call(this, props));
+
+    _this7.state = { count: 0 };
+    _this7.handleAddOne = _this7.handleAddOne.bind(_this7);
+    _this7.handleMinusOne = _this7.handleMinusOne.bind(_this7);
+    _this7.handleReset = _this7.handleReset.bind(_this7);
+
+    return _this7;
+  }
+
+  _createClass(Counter, [{
+    key: 'handleAddOne',
+    value: function handleAddOne() {
+      this.setState(function (prevState) {
+        return { count: prevState.count + 1 };
+      });
+    }
+  }, {
+    key: 'handleMinusOne',
+    value: function handleMinusOne() {
+      this.setState(function (prevState) {
+        return { count: prevState.count - 1 };
+      });
+    }
+  }, {
+    key: 'handleReset',
+    value: function handleReset() {
+      this.setState(function () {
+        return { count: 0 };
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'h1',
+          null,
+          this.state.count
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.handleAddOne },
+          '+1'
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.handleMinusOne },
+          '-1'
+        ),
+        React.createElement(
+          'button',
+          { onClick: this.handleReset },
+          'reset'
+        )
+      );
+    }
+  }]);
+
+  return Counter;
 }(React.Component);
 
 ReactDOM.render(React.createElement(IndecisionApp, null), document.getElementById('app'));
